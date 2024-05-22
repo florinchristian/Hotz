@@ -4,13 +4,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed = 5.0f;
-
-    public Rigidbody playerBody;
     
     public Transform playerTransform;
     public Transform cameraTransform;
-
+    
     public float extraRunSpeed = 5.0f;
+    
+    private CabinetHide _isInThisCabinet;
 
     private const float SlideDuration = 1.0f;
     private const float SlideDistance = 50.0f;
@@ -22,11 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
     private float _crouchDelay;
     private float _slideDelay;
-
+    
 
     private bool _isRunning;
 
     private const float CrouchTimeout = 0.5f;
+   
 
     void Start()
     {
@@ -36,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
         _isSliding = false;
         _isRunning = false;
         _crouchDelay = CrouchTimeout;
+        _isInThisCabinet = null;
+
     }
 
     void FixedUpdate()
@@ -44,8 +47,21 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
         DetectCrouch();
         DetectSlide();
+        DetectHiding();
     }
 
+    void DetectHiding()
+    {  
+        if (_isInThisCabinet != null)
+        {
+            _isInThisCabinet.Hide();
+        }
+    }
+
+    public void SetCabinet(CabinetHide newCabinet)
+    {
+        _isInThisCabinet = newCabinet;
+    }
     void DetectRun()
     {
         _isRunning = Input.GetKey(KeyCode.LeftShift);
