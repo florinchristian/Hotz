@@ -50,6 +50,7 @@
      <Compile Include="Assets/Base/Scripts/PlayerJump.cs" />
      <Compile Include="Assets/Base/Scripts/PlayerMovement.cs" />
      <Folder Include="Assets" />
+     <Folder Include="Assets/AI/prefab" />
      <Folder Include="Assets/Textures" />
      <Folder Include="Assets/Scenes" />
      <Folder Include="Assets/AI" />
