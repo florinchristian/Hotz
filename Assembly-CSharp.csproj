@@ -49,14 +49,27 @@
      <Compile Include="Assets/Base/Scripts/PlayerCamera.cs" />
      <Compile Include="Assets/Base/Scripts/PlayerJump.cs" />
      <Compile Include="Assets/Base/Scripts/PlayerMovement.cs" />
+     <Compile Include="Assets/AI/NeighbourAI.cs" />
      <Folder Include="Assets" />
+     <Folder Include="Assets/Thirdparty/Ciathyza" />
      <Folder Include="Assets/AI/prefab" />
+     <Folder Include="Assets/Thirdparty" />
      <Folder Include="Assets/Textures" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Textures" />
      <Folder Include="Assets/Scenes" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Materials/HDRP" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Materials" />
+     <Folder Include="Assets/AI/Materials" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Materials/URP" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Demo" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Materials/Standard" />
      <Folder Include="Assets/AI" />
      <Folder Include="Assets/Base" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Demo/Prototype Materials Demo" />
      <Folder Include="Assets/Base/Scripts" />
      <Folder Include="Assets/Materials" />
+     <Folder Include="Assets/Thirdparty/Ciathyza/Gridbox Prototype Materials/Template" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
