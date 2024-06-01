@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84c4fad589890045a8207189d4bfdae, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cf32546f5211104a91332fdc54c3f0f, type: 3}
   m_Name: Opening Potion
   m_EditorClassIdentifier: 
   itemName: Opening Potion
   count: 0
   image: {fileID: 21300000, guid: 12321d7a2333f1a46b252fc1183bbd5e, type: 3}
   prefab: {fileID: 2539229727026672796, guid: c0a2bd5f3574fc94a98a66f5106c9ff7, type: 3}
-  cost: 80
+  cost: 100
