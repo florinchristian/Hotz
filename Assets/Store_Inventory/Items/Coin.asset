@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84c4fad589890045a8207189d4bfdae, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cf32546f5211104a91332fdc54c3f0f, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
   itemName: Coin
   count: 100
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: db0ad406281a9b24cbd8bd17a5f254a5, type: 3}
   prefab: {fileID: 6404793663792809830, guid: e12c6af8dd7bee143b4aaf5e911e66b0, type: 3}
-  cost: 100
+  cost: 0

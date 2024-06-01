@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84c4fad589890045a8207189d4bfdae, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cf32546f5211104a91332fdc54c3f0f, type: 3}
   m_Name: Invisibility Potion
   m_EditorClassIdentifier: 
   itemName: Invisibility Potion
