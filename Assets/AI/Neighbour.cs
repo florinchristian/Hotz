@@ -1,27 +1,19 @@
 using AI;
 using UnityEngine;
 
-public class NeighbourAI : MonoBehaviour
+public class Neighbour : MonoBehaviour
 {
     private INeighbourAI _aiComponent;
     
     void Start()
     {
         _aiComponent = GetComponent<INeighbourAI>();
+        
+        _aiComponent.OnStart();
     }
     
     void Update()
     {
-        if (PlayerIsNearby(_aiComponent.GetPlayerDetectionRange()))
-        {
-            
-        }
-        
         _aiComponent.UpdateGameObject();
-    }
-
-    bool PlayerIsNearby(float range)
-    {
-        return true;
     }
 }

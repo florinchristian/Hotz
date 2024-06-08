@@ -1,7 +1,10 @@
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
+    public float cameraSensitivity = 1.0f;
+    
     public Transform cameraTransform;
     public Transform playerTransform;
     
@@ -21,7 +24,7 @@ public class PlayerCamera : MonoBehaviour
         var horizontalRotation = Input.GetAxis("Mouse X");
         var verticalRotation = Input.GetAxis("Mouse Y");
         
-        playerTransform.Rotate(0, horizontalRotation, 0);
-        cameraTransform.Rotate(-verticalRotation, 0, 0);
+        playerTransform.Rotate(0, horizontalRotation * cameraSensitivity, 0);
+        cameraTransform.Rotate(-verticalRotation * cameraSensitivity, 0, 0);
     }
 }

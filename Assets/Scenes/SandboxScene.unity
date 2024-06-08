@@ -248,14 +248,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512949576}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.008726558, w: 0.999962}
+  m_LocalRotation: {x: 0.0054994905, y: 0.6301776, z: 0.0067755748, w: 0.77640206}
   m_LocalPosition: {x: 2.265, y: 1.5, z: -1.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 514623238}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 78.13, z: 1}
 --- !u!136 &512949578
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4598c20ed29240f6b137e5b0ad65902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSensitivity: 2
   cameraTransform: {fileID: 514623238}
   playerTransform: {fileID: 512949577}
 --- !u!1 &514623235
@@ -638,6 +639,7 @@ GameObject:
   - component: {fileID: 1159189127}
   - component: {fileID: 1159189126}
   - component: {fileID: 1159189130}
+  - component: {fileID: 1159189131}
   m_Layer: 0
   m_Name: AiNeighbour
   m_TagString: Untagged
@@ -688,7 +690,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 879817d4671594b9b9399cfa45b4b224, type: 2}
+  - {fileID: 2100000, guid: 34ba6d6227b9b418b891cac31a7a70c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -726,13 +728,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159189125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4989446, y: 1.1, z: 13.540398}
+  m_LocalRotation: {x: 0, y: 0.9769898, z: -0, w: -0.21328612}
+  m_LocalPosition: {x: 1.498945, y: 1.1, z: 13.540398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 204.63, z: 0}
 --- !u!114 &1159189130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +747,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5618a4d6c8d4825992f4b09b037050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1159189131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159189125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60a17bef851496f9b1b909aff170197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiBody: {fileID: 1159189129}
+  playerBody: {fileID: 512949577}
+  patrolPoints:
+  - {x: 1.498945, y: 1.1, z: 13.540398}
+  - {x: 14.55, y: 1.1, z: 13.540398}
+  - {x: 14.55, y: 1.1, z: 21.24}
+  - {x: 1.498945, y: 1.1, z: 21.24}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
