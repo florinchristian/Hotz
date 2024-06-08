@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PasswordSafe : MonoBehaviour
+public class PasswordSafe : SafeType
 {
     public GameObject panel;
     public GameObject WinningObject;
@@ -23,9 +23,9 @@ public class PasswordSafe : MonoBehaviour
         _anim = GetComponent<Animator>();
         _opened = false;
     }
-    public  void OnMouseDown()
+    public  override void OnMouseDown()
     {
-        if (!_isOpen)
+        if (!_isOpen && !_opened)
         {
             if (HavePotion())
                 Open();

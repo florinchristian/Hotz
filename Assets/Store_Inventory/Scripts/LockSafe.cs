@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
-public class LockSafe : MonoBehaviour
+public class LockSafe : SafeType
 {
     public GameObject panel;
     public GameObject WinningObject;
@@ -39,9 +39,9 @@ public class LockSafe : MonoBehaviour
         AssignValues();
         _opened = false;
     }
-    public  void OnMouseDown()
+    public  override void OnMouseDown()
     {
-        if (!_isOpen)
+        if (!_isOpen && !_opened)
         {
             if (HavePotion())
                 Open();
