@@ -9,29 +9,13 @@ public class Item : ScriptableObject
     public Sprite image;
     public ItemController prefab;
     public int cost;
-    private ItemType itemType;
 
-    private void selectType()
-    {  
-        switch (itemName)
-        { 
-            case "Darkening Potion":
-                itemType = new DarkeningPotion();
-                break;
-            case "Invisibility Potion":
-                itemType = new InvisibilityPotion();
-                break;
-            case "Opening Potion":
-                itemType = new OpeningPotion();
-                break;
-        }
-    }
-
-    public void UseItem()
+    public bool REemovable()
     {
-        selectType();
-        itemType.UseItem();
         count--;
+        if (count <= 0)
+            return true;
+        return false;
     }
 
 
