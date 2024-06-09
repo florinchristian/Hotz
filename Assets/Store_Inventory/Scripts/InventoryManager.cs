@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,23 +67,17 @@ public class InventoryManager : MonoBehaviour
 
                 GameObject closeButton = Instantiate(CloseButtonPrefab, obj.transform);
                 closeButton.GetComponent<Button>().onClick.AddListener(() => CloseInstance(obj, item));
-
-                obj.GetComponent<Button>().onClick.AddListener(() => UseItem(item, obj));
             
         }
     }
 
-    private void UseItem(Item item,GameObject obj)
+    private void UseItem(Item item)
     {
-       item.UseItem();
-       if (item.count <= 0)
+       if (item.REemovable())
        {
-           Destroy(obj);
            Remove(item);
        }
-
-       var itemCount = obj.transform.Find("Count").GetComponent<TextMeshProUGUI>();
-       itemCount.text = item.count.ToString();
+       ListItems();
     }
 
     private void ThrowItem(Item item)
@@ -108,5 +103,17 @@ public class InventoryManager : MonoBehaviour
         ThrowItem(item);
         items.Remove(item);
         Destroy(obj);
+    }
+
+    public bool HasItem(Item item)
+    {
+        foreach (var inventoryItem in items)
+        {
+            if (item.itemName == inventoryItem.name)
+            {   UseItem(item);
+                return true;
+            }
+        }
+        return false;
     }
 }

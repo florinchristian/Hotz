@@ -15,7 +15,7 @@ public class PlayerCamera : MonoBehaviour
     
     void FixedUpdate()
     {
-        PerformViewMovement();
+        if(CameraRotationController.instance.CanFollowMouse()) PerformViewMovement();
     }
 
     void PerformViewMovement()

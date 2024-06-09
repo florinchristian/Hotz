@@ -30,20 +30,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        _isCrouching = false;
-        _isSliding = false;
-        _isRunning = false;
-        _crouchDelay = CrouchTimeout;
+       
+            Cursor.lockState = CursorLockMode.Locked;
+            _isCrouching = false;
+            _isSliding = false;
+            _isRunning = false;
+            _crouchDelay = CrouchTimeout;
+        
     }
 
     void FixedUpdate()
     {
-        DetectRun();
-        MovePlayer();
-        DetectCrouch();
-        DetectSlide();
+        if (CameraRotationController.instance.CanFollowMouse())
+        {
+            DetectRun();
+            MovePlayer();
+            DetectCrouch();
+            DetectSlide();
+        }
     }
 
     void DetectRun()
