@@ -13,9 +13,9 @@ TagManager:
   - holdLayer
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Wall
+  - Ground
+  - WhatIsGrappleable
   - 
   - 
   - 

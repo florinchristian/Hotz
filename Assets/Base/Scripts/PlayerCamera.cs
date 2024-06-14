@@ -6,6 +6,7 @@ public class PlayerCamera : MonoBehaviour
     
     public Transform cameraTransform;
     public Transform playerTransform;
+    public Transform orientation;
     
     void Start()
     {
@@ -25,5 +26,9 @@ public class PlayerCamera : MonoBehaviour
         
         playerTransform.Rotate(0, horizontalRotation * cameraSensitivity, 0);
         cameraTransform.Rotate(-verticalRotation * cameraSensitivity, 0, 0);
+        
+        
+        
+        orientation.rotation=Quaternion.Euler(0,horizontalRotation*cameraSensitivity,0);
     }
 }

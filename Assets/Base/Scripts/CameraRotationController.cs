@@ -13,13 +13,20 @@ public class CameraRotationController : MonoBehaviour
     {
         instance = this;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (InventoryStore.activeSelf || SafeUiPassword.activeSelf || SafeUiLock.activeSelf)
+        {
             _canFollowMouse = false;
-        else _canFollowMouse = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            _canFollowMouse = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     public bool CanFollowMouse()

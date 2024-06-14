@@ -14,7 +14,7 @@ public class OpenCloseInventoryStore : MonoBehaviour
     private float _transparencyLevel = 0.5f;
     void Start()
     {
-        
+        _isOpen = false;
         OpenInventory();
     }
 
@@ -26,13 +26,11 @@ public class OpenCloseInventoryStore : MonoBehaviour
             _isOpen = !_isOpen;
             if (_isOpen)
             {
-                Cursor.lockState = CursorLockMode.None;
                 instance.SetActive(true);
             }
             else
-            {
-                instance.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
+            { instance.SetActive(false);
+            
             }
         }
 
@@ -42,7 +40,7 @@ public class OpenCloseInventoryStore : MonoBehaviour
             OpenStore();
     }
 
-    private void OpenStore()
+    public void OpenStore()
     {
         inventory.SetActive(false);
         store.SetActive(true);
@@ -53,7 +51,7 @@ public class OpenCloseInventoryStore : MonoBehaviour
         storeImage.color=new Color(storeImage.color.r, storeImage.color.g, storeImage.color.b, _transparencyLevel);
     }
 
-    private void OpenInventory()
+    public void OpenInventory()
     { 
         inventory.SetActive(true);
         store.SetActive(false);
