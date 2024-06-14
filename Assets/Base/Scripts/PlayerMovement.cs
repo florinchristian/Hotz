@@ -12,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
     public bool isWallRunning;
     public float extraRunSpeed = 5.0f;
     public float groundDrag;
+    public bool activeGrapple;
+    public bool swinging;
+    public float swingSpeed;
     
     private Rigidbody playerBody;
     
@@ -23,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isCrouching;
     private bool _isSliding;
+    public bool _freeze;
+    private bool _enableMovementOnNextTouch;
 
     private float _crouchDelay;
     private float _slideDelay;
@@ -31,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isRunning;
 
     private const float CrouchTimeout = 0.5f;
+    private Vector3 velocityToSet;
 
     void Start()
     {
@@ -47,7 +53,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        playerBody.drag =(_isOnGround)? groundDrag:0;
+        if (_freeze)
+        {
+            playerBody.velocity = Vector3.zero;
+        }
+        
+        playerBody.drag =(_isOnGround && !activeGrapple)? groundDrag:0;
         SpeedControl();
     }
 
@@ -69,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
+        if (activeGrapple) return;
+        
         var horizontalMovement = Input.GetAxis("Horizontal");
         var verticalMovement = Input.GetAxis("Vertical");
         if (_isSliding)
@@ -94,8 +107,12 @@ public class PlayerMovement : MonoBehaviour
         {
             _totalSpeed += extraRunSpeed;
         }
-        if(_isOnGround)
-        playerBody.AddForce(movement.normalized * (_totalSpeed * 10f), ForceMode.Force);
+
+        if (swinging)
+            _totalSpeed = swingSpeed;
+        
+        
+        if(_isOnGround || swinging) playerBody.AddForce(movement.normalized * (_totalSpeed * 10f), ForceMode.Force);
         //playerTransform.Translate(totalSpeed * Time.deltaTime * movement, Space.World);
     }
 
@@ -147,6 +164,18 @@ public class PlayerMovement : MonoBehaviour
         {
             _isOnGround = true;
         }
+
+        if (_enableMovementOnNextTouch)
+        {
+            _enableMovementOnNextTouch = false;
+            ResetRestrictions();
+            GetComponent<Grappling>().StopGrapple();
+        }
+    }
+
+    public void ResetRestrictions()
+    {
+        activeGrapple = false;
     }
 
     private void OnCollisionExit(Collision other)
@@ -159,6 +188,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
+
+        if (activeGrapple) return;
+        if (swinging) return;
         Vector3 flatVel = new Vector3(playerBody.velocity.x, 0f, playerBody.velocity.z);
 
         if (flatVel.magnitude > _totalSpeed)
@@ -167,4 +199,33 @@ public class PlayerMovement : MonoBehaviour
             playerBody.velocity = new Vector3(limitedVel.x, playerBody.velocity.y, limitedVel.z);
         }
     }
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+    {
+        float gravity = Physics.gravity.y;
+        float displacementY = endPoint.y - startPoint.y;
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) 
+                                               + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+        return velocityXZ + velocityY;
+    }
+    private void SetVelocity()
+    {
+        _enableMovementOnNextTouch = true;
+        playerBody.velocity = velocityToSet;
+
+        
+    }
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+    {
+        activeGrapple = true;
+
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+        Invoke(nameof(SetVelocity), 0.1f);
+
+        Invoke(nameof(ResetRestrictions), 3f);
+    }
+
 }
