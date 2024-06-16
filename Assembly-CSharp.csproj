@@ -101,9 +101,11 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Store_Inventory\Scripts\ItemController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+     <Compile Include="Assets\Base\Scripts\CabinetHide.cs" />
      <Compile Include="Assets\Store_Inventory\Scripts\Item.cs" />
      <Compile Include="Assets\Store_Inventory\Scripts\PasswordSafe.cs" />
      <Compile Include="Assets\Store_Inventory\Scripts\StoreManager.cs" />
+     <Compile Include="Assets\Base\Scripts\ShowKey.cs" />
      <Compile Include="Assets\Store_Inventory\Scripts\LockPanel.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
      <Folder Include="Assets" />

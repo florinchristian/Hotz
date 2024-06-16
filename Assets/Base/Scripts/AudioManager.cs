@@ -7,14 +7,14 @@ public class AudioMAnager : MonoBehaviour
 {
     public static AudioMAnager instance;
     
-    [Header("Audio Sources")] [SerializeField]
-    private AudioSource backgroundMusic;
-     public AudioSource buttonClick;
+    [Header("Audio Sources")] 
+    public AudioSource backgroundMusic;
+    public AudioSource buttonClick;
+    public AudioSource cabinetDoor;
 
     void Start()
     {
         instance = this;
-        backgroundMusic.Play();
         
     }
 }

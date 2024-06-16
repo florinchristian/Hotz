@@ -22,7 +22,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && _isOnGround)
         {
-            playerBody.AddForce(0, 2f, 0, ForceMode.Impulse);
+            playerBody.AddForce(0, 5f, 0, ForceMode.Impulse);
         }
     }
 
