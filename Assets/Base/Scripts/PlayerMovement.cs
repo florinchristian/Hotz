@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerSpeed = 5.0f;
+    public float playerSpeed = 7.0f;
     
     public Transform playerTransform;
     public Transform cameraTransform;
 
     public bool isWallRunning;
-    public float extraRunSpeed = 5.0f;
+    public float extraRunSpeed = 7.0f;
     public float groundDrag;
     public bool activeGrapple;
     public bool swinging;
@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     private const float CrouchTimeout = 0.5f;
     private Vector3 velocityToSet;
+    public CabinetHide _isInThisCabinet;
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
             _isSliding = false;
             _isRunning = false;
             _crouchDelay = CrouchTimeout;
+            _isInThisCabinet = null;
             playerBody = GetComponent<Rigidbody>();
 
     }
@@ -70,9 +72,21 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer();
             DetectCrouch();
             DetectSlide();
+            DetectHiding();
+        }
+    }
+    void DetectHiding()
+    {  
+        if (_isInThisCabinet != null)
+        {
+            _isInThisCabinet.Hide();
         }
     }
 
+    public void SetCabinet(CabinetHide newCabinet)
+    {
+        _isInThisCabinet = newCabinet;
+    }
     void DetectRun()
     {
         _isRunning = Input.GetKey(KeyCode.LeftShift);

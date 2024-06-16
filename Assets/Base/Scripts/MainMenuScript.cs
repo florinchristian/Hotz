@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,12 @@ public class MainMenuScript : MonoBehaviour
 {
    private bool settingsMenu=false;
    public GameObject settingsMenuInstance;
+
+   public void Start()
+   {
+      AudioMAnager.instance.backgroundMusic.Play();
+   }
+
    public void PlayGame()
    {
       AudioMAnager.instance.buttonClick.Play();

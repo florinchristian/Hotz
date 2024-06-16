@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,17 +6,27 @@ using UnityEngine;
 
 public class MiniMapScript : MonoBehaviour
 {
-    public Transform Player;
+    
     public GameObject InventoryStore;
     public GameObject MiniMap;
+    public GameObject playerScript;
 
     private float distance = 10;
+    private PlayerMovement pm;
+    private Transform Player;
+
+    private void Start()
+    {
+        pm = playerScript.GetComponent<PlayerMovement>();
+        Player = playerScript.GetComponent<Transform>();
+    }
+
     void Update()
     {
-        /*if (InventoryStore.activeSelf)
+        if (InventoryStore.activeSelf || pm._isInThisCabinet!=null)
             MiniMap.SetActive(false);
         else
-            MiniMap.SetActive(true);*/
+            MiniMap.SetActive(true);
     }
     void LateUpdate()
     {
