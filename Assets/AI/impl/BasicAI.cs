@@ -31,6 +31,11 @@ namespace AI.impl
         {
             var player = GetVisiblePlayer();
 
+            if (player == null)
+            {
+                return;
+            }
+
             if (PlayerInRange(player, GetPlayerDetectionRange()))
             {
                 _lastPatrolPosition = aiBody.position;

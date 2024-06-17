@@ -10,7 +10,7 @@ public class PlayerCamera : MonoBehaviour
     
     void Start()
     {
-        Debug.Log("Player camera script has loaded!");       
+        Debug.Log("Player camera script has loaded!");
     }
 
     

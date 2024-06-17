@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using AI;
+using AI.impl;
 using UnityEngine;
 
 public class Neighbour : MonoBehaviour
@@ -7,7 +9,17 @@ public class Neighbour : MonoBehaviour
     
     void Start()
     {
-        _aiComponent = GetComponent<INeighbourAI>();
+        var components = GetComponents<INeighbourAI>();
+
+        foreach (var aiComponent in components)
+        {
+            if (aiComponent.isActiveAndEnabled)
+            {
+                _aiComponent = aiComponent;
+                
+                break;
+            }
+        }
         
         _aiComponent.OnStart();
     }
