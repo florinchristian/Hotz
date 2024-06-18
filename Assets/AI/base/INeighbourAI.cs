@@ -17,6 +17,8 @@ namespace AI
         
         public LayerMask targetMask;
         public LayerMask obstacleMask;
+
+        public Player player;
         
         void Start()
         {
@@ -30,6 +32,11 @@ namespace AI
 
         protected virtual Transform GetVisiblePlayer()
         {
+            if (!player.IsVisible())
+            {
+                return null;
+            }
+            
             Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
             
             for (int i = 0; i < targetsInViewRadius.Length; i++)
@@ -83,7 +90,7 @@ namespace AI
         
         protected float GetPlayerFollowRange()
         {
-            return GetPlayerDetectionRange() + 2.5f;
+            return GetPlayerDetectionRange() + 5f;
         }
 
         public abstract void OnStart();
@@ -92,5 +99,6 @@ namespace AI
         
         protected abstract float GetPlayerDetectionRange();
         protected abstract float GetWalkingSpeed();
+        public abstract void OnObjectDetect(Vector3 point);
     }
 }

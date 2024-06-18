@@ -103,5 +103,10 @@ namespace AI.impl
         {
             return 1.5f;
         }
+
+        public override void OnObjectDetect(Vector3 point)
+        {
+            
+        }
     }
 }

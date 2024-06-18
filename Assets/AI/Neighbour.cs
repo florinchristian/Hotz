@@ -28,4 +28,9 @@ public class Neighbour : MonoBehaviour
     {
         _aiComponent.UpdateGameObject();
     }
+
+    public void NotifyThrownObject(Vector3 point)
+    {
+        _aiComponent.OnObjectDetect(point);
+    }
 }

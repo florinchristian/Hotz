@@ -13,6 +13,11 @@ namespace AI.impl
         
         protected override Transform GetVisiblePlayer()
         {
+            if (!player.IsVisible())
+            {
+                return null;
+            }
+            
             return playerBody;
         }
 
@@ -24,6 +29,11 @@ namespace AI.impl
         protected override float GetWalkingSpeed()
         {
             return 2.5f;
+        }
+        
+        public override void OnObjectDetect(Vector3 point)
+        {
+            
         }
     }
 }

@@ -1,48 +1,46 @@
-using System.Collections;
 using System.Collections.Generic;
+using AI;
 using TMPro;
-using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-     public static InventoryManager instace;
+    public static InventoryManager instace;
     public List<Item> items = new List<Item>();
     public Transform ItemContent;
     public GameObject InventoryItem;
     public GameObject CloseButtonPrefab;
+
     private void Awake()
     {
         instace = this;
     }
 
     public void Add(Item item)
-    { 
-        
-            bool done = false;
-            foreach (var inventoryItem in items)
+    {
+        bool done = false;
+        foreach (var inventoryItem in items)
+        {
+            if (item.name == inventoryItem.name)
             {
-                if (item.name == inventoryItem.name)
-                {
-                    inventoryItem.count++;
-                    done = true;
-                    break;
-                }
+                inventoryItem.count++;
+                done = true;
+                break;
             }
+        }
 
-            if (done == false)
-            {
-                item.count = 1;
-                items.Add(item);
-            }
-            ListItems();
-        
+        if (done == false)
+        {
+            item.count = 1;
+            items.Add(item);
+        }
+
+        ListItems();
     }
 
     public void Remove(Item item)
     {
-        
         items.Remove(item);
     }
 
@@ -52,32 +50,44 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+
         foreach (var item in items)
         {
+            GameObject obj = Instantiate(InventoryItem, ItemContent);
+
+            var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
+            var itemImage = obj.transform.Find("ItemImage").GetComponent<Image>();
+            var itemCount = obj.transform.Find("Count").GetComponent<TextMeshProUGUI>();
+
+            itemName.text = item.itemName;
+            itemImage.sprite = item.image;
+            itemCount.text = item.count.ToString();
+
+            GameObject closeButton = Instantiate(CloseButtonPrefab, obj.transform);
+            closeButton.GetComponent<Button>().onClick.AddListener(() => CloseInstance(obj, item));
             
-                GameObject obj = Instantiate(InventoryItem, ItemContent);
+            obj.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Debug.Log($"Used {itemName.text} potion!");
+                
+                var playerGameObject = GameObject.Find("Player");
 
-                var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
-                var itemImage = obj.transform.Find("ItemImage").GetComponent<Image>();
-                var itemCount = obj.transform.Find("Count").GetComponent<TextMeshProUGUI>();
-
-                itemName.text = item.itemName;
-                itemImage.sprite = item.image;
-                itemCount.text = item.count.ToString();
-
-                GameObject closeButton = Instantiate(CloseButtonPrefab, obj.transform);
-                closeButton.GetComponent<Button>().onClick.AddListener(() => CloseInstance(obj, item));
-            
+                if (itemName.text.Equals("Invisibility Potion"))
+                {
+                    playerGameObject.GetComponent<Player>().SetInvisible(3);
+                }
+            });
         }
     }
 
     private void UseItem(Item item)
     {
-       if (item.REemovable())
-       {
-           Remove(item);
-       }
-       ListItems();
+        if (item.REemovable())
+        {
+            Remove(item);
+        }
+
+        ListItems();
     }
 
     private void ThrowItem(Item item)
@@ -98,7 +108,8 @@ public class InventoryManager : MonoBehaviour
             item.count--;
         }
     }
-    private void CloseInstance(GameObject obj,Item item)
+
+    private void CloseInstance(GameObject obj, Item item)
     {
         ThrowItem(item);
         items.Remove(item);
@@ -110,10 +121,12 @@ public class InventoryManager : MonoBehaviour
         foreach (var inventoryItem in items)
         {
             if (item.itemName == inventoryItem.name)
-            {   UseItem(item);
+            {
+                UseItem(item);
                 return true;
             }
         }
+
         return false;
     }
 }

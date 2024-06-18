@@ -8,6 +8,9 @@ namespace AI.impl
     {
         private bool _isPatrolling = false;
         
+        private bool _isFollowingObject = false;
+        private Vector3 _detectedObject;
+        
         public override void OnStart()
         {
             Debug.Log("Initialised Advanced AI!");
@@ -44,9 +47,21 @@ namespace AI.impl
         
         public override void UpdateGameObject()
         {
+            if (_isFollowingObject)
+            {
+                MoveTowards(_detectedObject);
+
+                if (HasArrivedAtPoint(_detectedObject))
+                {
+                    _isFollowingObject = false;
+                }
+
+                return;
+            }
+            
             var player = GetVisiblePlayer();
 
-            if (PlayerInRange(player, GetPlayerDetectionRange()))
+            if (player != null && PlayerInRange(player, GetPlayerDetectionRange()))
             {
                 StopCoroutine(nameof(Patrol));
                 _isPatrolling = false;
@@ -61,7 +76,20 @@ namespace AI.impl
         
         protected override Transform GetVisiblePlayer()
         {
+            if (!player.IsVisible())
+            {
+                return null;
+            }
+            
             return playerBody;
+        }
+        
+        public override void OnObjectDetect(Vector3 point)
+        {
+            Debug.Log($"Object detected at {point}");
+            
+            _detectedObject = point;
+            _isFollowingObject = true;
         }
         
         protected override float GetPlayerDetectionRange()

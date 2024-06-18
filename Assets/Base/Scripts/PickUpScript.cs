@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -85,5 +87,16 @@ public class PickUpScript : MonoBehaviour
         float random = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
         
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        var neighbourGo = GameObject.Find("AiNeighbour (2)");
+        
+        Debug.Log(neighbourGo);
+        
+        neighbourGo
+            .GetComponent<Neighbour>()
+            .NotifyThrownObject(GetComponent<Transform>().position);
     }
 }
