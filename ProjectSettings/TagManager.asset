@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GROUND
   - canPickUp
+  - THROWABLE
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Ground
   - WhatIsGrappleable
   - Cabinet
-  - 
-  - 
+  - Player
+  - Post Processing
   - 
   - 
   - 
