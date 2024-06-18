@@ -27,6 +27,8 @@ public class KeySafe : SafeType
             if (CanOpen())
                 Open();
             else if (HavePotion()) Open();
+            else 
+                _anim.SetTrigger("Shake");
         }
         else
         {

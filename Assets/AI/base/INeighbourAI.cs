@@ -13,7 +13,7 @@ namespace AI
         public Transform aiBody;
         public Transform playerBody;
         
-        public float viewRadius = 10f;
+        public float viewRadius = 20f;
         public float viewAngle = 90f;
         
         public LayerMask targetMask;

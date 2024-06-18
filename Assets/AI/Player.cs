@@ -31,11 +31,26 @@ namespace AI
         
             StartCoroutine(coroutine);
         }
+        public void CloseLights(float duration)
+        {
+            _isVisible = false;
+
+            var coroutine = NightVisionTimeOut(duration);
+        
+            StartCoroutine(coroutine);
+        }
 
         private IEnumerator InvisibilityTimeout(float duration)
         {
             yield return new WaitForSeconds(duration);
             _isVisible = true;
+        }
+        
+        private IEnumerator NightVisionTimeOut(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            _isVisible = true;
+            NightVision.instance.GoToLightMode();
         }
     }
 }

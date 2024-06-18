@@ -7,13 +7,16 @@ namespace AI.impl
     public class AdvancedAI: INeighbourAI
     {
         private bool _isPatrolling = false;
-        
+
+        private Transform enemy;
         private bool _isFollowingObject = false;
         private Vector3 _detectedObject;
-        
+        private float minAcceptedDistance = 20;
+        private float detectingRange = 20f;
         public override void OnStart()
         {
             Debug.Log("Initialised Advanced AI!");
+            enemy = GetComponent<Transform>();
         }
 
         private IEnumerator Patrol()
@@ -94,14 +97,18 @@ namespace AI.impl
         public override void OnObjectDetect(Vector3 point)
         {
             Debug.Log($"Object detected at {point}");
-            
-            _detectedObject = point;
-            _isFollowingObject = true;
+            float distance = Vector3.Distance (enemy.position, point);
+            Debug.Log(distance);
+            if (distance < minAcceptedDistance)
+            {
+                _detectedObject = point;
+                _isFollowingObject = true;
+            }
         }
         
         protected override float GetPlayerDetectionRange()
         {
-            return 8.0f;
+            return detectingRange;
         }
         
         protected override float GetWalkingSpeed()

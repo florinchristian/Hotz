@@ -67,6 +67,7 @@ public class LockSafe : SafeType
 
     private bool HavePotion()
     { 
+        
         return InventoryManager.instace.HasItem(potion);
 
     }
@@ -85,6 +86,7 @@ public class LockSafe : SafeType
                 else
                 {
                     InitializeList();
+                    AudioMAnager.instance.wrongCode.Play();
                     return false;
                 }
             }

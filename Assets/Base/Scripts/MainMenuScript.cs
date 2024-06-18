@@ -17,7 +17,7 @@ public class MainMenuScript : MonoBehaviour
    public void PlayGame()
    {
       AudioMAnager.instance.buttonClick.Play();
-      SceneManager.LoadScene("SandboxScene");
+      SceneManager.LoadScene("Arena");
    }
 
    public void QuitGame()

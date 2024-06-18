@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     public Transform ItemContent;
     public GameObject InventoryItem;
     public GameObject CloseButtonPrefab;
+    public GameObject light;
 
     private void Awake()
     {
@@ -19,12 +21,15 @@ public class InventoryManager : MonoBehaviour
 
     public void Add(Item item)
     {
+        
         bool done = false;
         foreach (var inventoryItem in items)
         {
             if (item.name == inventoryItem.name)
             {
+                
                 inventoryItem.count++;
+                CheckForWin(item);
                 done = true;
                 break;
             }
@@ -37,6 +42,12 @@ public class InventoryManager : MonoBehaviour
         }
 
         ListItems();
+    }
+
+    private void CheckForWin(Item item)
+    {
+        if (item.itemName == "" && item.count == 3)
+            SceneManager.LoadScene("Winner");
     }
 
     public void Remove(Item item)
@@ -66,20 +77,30 @@ public class InventoryManager : MonoBehaviour
             GameObject closeButton = Instantiate(CloseButtonPrefab, obj.transform);
             closeButton.GetComponent<Button>().onClick.AddListener(() => CloseInstance(obj, item));
             
-            obj.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                Debug.Log($"Used {itemName.text} potion!");
-                
-                var playerGameObject = GameObject.Find("Player");
-
-                if (itemName.text.Equals("Invisibility Potion"))
-                {
-                    playerGameObject.GetComponent<Player>().SetInvisible(3);
-                }
-            });
+            obj.GetComponent<Button>().onClick.AddListener(() =>MagicalPotions(itemName.text,item));
         }
     }
 
+    private void MagicalPotions(string itemName,Item item)
+    {
+          Debug.Log($"Used {itemName} potion!");
+                        
+          var playerGameObject = GameObject.Find("Player");
+        
+          if (itemName.Equals("Invisibility Potion"))
+          { 
+              playerGameObject.GetComponent<Player>().SetInvisible(3);
+              UseItem(item);
+          }
+
+          if (itemName.Equals("Darkening Potion"))
+          {
+              NightVision.instance.GoToDarkMode();
+              playerGameObject.GetComponent<Player>().CloseLights(3);
+              UseItem(item);
+          }
+
+    }
     private void UseItem(Item item)
     {
         if (item.REemovable())
