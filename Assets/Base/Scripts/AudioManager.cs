@@ -11,6 +11,10 @@ public class AudioMAnager : MonoBehaviour
     public AudioSource backgroundMusic;
     public AudioSource buttonClick;
     public AudioSource cabinetDoor;
+    public AudioSource buyItem;
+    public AudioSource gameOver;
+    public AudioSource wrongCode;
+    public AudioSource collectMoney;
 
     void Start()
     {

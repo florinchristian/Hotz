@@ -16,4 +16,4 @@ MonoBehaviour:
   count: 0
   image: {fileID: 21300000, guid: 12321d7a2333f1a46b252fc1183bbd5e, type: 3}
   prefab: {fileID: 2539229727026672796, guid: c0a2bd5f3574fc94a98a66f5106c9ff7, type: 3}
-  cost: 100
+  cost: 200

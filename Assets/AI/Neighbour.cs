@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AI;
 using AI.impl;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Neighbour : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class Neighbour : MonoBehaviour
         
         _aiComponent.SetGameOverCallback(() =>
         {
-            Debug.Log("Game Over!");
+            SceneManager.LoadScene("Loser");
         });
         
         _aiComponent.OnStart();

@@ -57,7 +57,15 @@ public class PasswordSafe : SafeType
     public bool CheckPassword(string inputTextField)
     {
         Debug.Log(_assignedPassword);
-        return (inputTextField == _assignedPassword);
+        if (inputTextField == _assignedPassword)
+        {
+            return true;
+        }
+        else
+        {
+            AudioMAnager.instance.wrongCode.Play();
+            return false;
+        }
     }
 
     public void Open()

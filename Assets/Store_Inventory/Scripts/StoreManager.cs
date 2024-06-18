@@ -50,7 +50,10 @@ public class StoreManager : MonoBehaviour
 
     private void BuyItem(Item item)
     {
-        if(MoneyController.instance.BuyItem(item.cost))
+        if (MoneyController.instance.BuyItem(item.cost))
+        {
             InventoryManager.instace.Add(item);
+            AudioMAnager.instance.buyItem.Play();
+        }
     }
 }

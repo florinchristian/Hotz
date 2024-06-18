@@ -22,6 +22,7 @@ public class ItemController : MonoBehaviour
     private void CollectMoney()
     {
         MoneyController.instance.CollectMoney(item.count);
+        AudioMAnager.instance.collectMoney.Play();
         Destroy(gameObject);
     }
 }
