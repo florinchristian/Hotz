@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - GROUND
+  - canPickUp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - holdLayer
   - Water
   - UI
-  - PLAYER
-  - 
-  - 
-  - 
+  - Wall
+  - Ground
+  - WhatIsGrappleable
+  - Cabinet
   - 
   - 
   - 
