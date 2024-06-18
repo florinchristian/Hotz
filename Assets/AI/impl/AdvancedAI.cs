@@ -64,8 +64,15 @@ namespace AI.impl
             if (player != null && PlayerInRange(player, GetPlayerDetectionRange()))
             {
                 StopCoroutine(nameof(Patrol));
+                
                 _isPatrolling = false;
+                
                 MoveTowards(player.position);   
+                
+                if (HasArrivedAtPoint(player.position, 1f))
+                {
+                    gameOverCallback.Invoke();
+                }
             }
             else if (!_isPatrolling)
             {

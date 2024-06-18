@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace AI
         public LayerMask obstacleMask;
 
         public Player player;
+
+        public Action gameOverCallback;
         
         void Start()
         {
@@ -28,6 +31,11 @@ namespace AI
         void Update()
         {
             
+        }
+
+        public void SetGameOverCallback(Action gameOverCallback)
+        {
+            this.gameOverCallback = gameOverCallback;
         }
 
         protected virtual Transform GetVisiblePlayer()
@@ -83,9 +91,9 @@ namespace AI
             return Vector3.Distance(playerTransform.position, aiBody.transform.position) <= range;
         }
         
-        protected bool HasArrivedAtPoint(Vector3 point)
+        protected bool HasArrivedAtPoint(Vector3 point, float range = 0.1f)
         {
-            return Vector3.Distance(aiBody.position, point) <= 0.1f;
+            return Vector3.Distance(aiBody.position, point) <= range;
         }
         
         protected float GetPlayerFollowRange()

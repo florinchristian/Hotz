@@ -21,6 +21,11 @@ public class Neighbour : MonoBehaviour
             }
         }
         
+        _aiComponent.SetGameOverCallback(() =>
+        {
+            Debug.Log("Game Over!");
+        });
+        
         _aiComponent.OnStart();
     }
     

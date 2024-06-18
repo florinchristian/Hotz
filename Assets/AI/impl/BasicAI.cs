@@ -55,6 +55,11 @@ namespace AI.impl
                 var player = GetVisiblePlayer();
                 
                 MoveTowards(player.position);
+
+                if (HasArrivedAtPoint(player.position, 1f))
+                {
+                    gameOverCallback.Invoke();
+                }
                 
                 return;
             }
